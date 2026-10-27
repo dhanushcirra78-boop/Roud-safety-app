@@ -317,3 +317,84 @@ button[class*="bg-emerald-500"] {
     transition-duration: .01ms !important;
   }
 }
+
+/* Restore original SafeRoute custom styles */
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+
+.pulse-dot {
+  animation: pulse-subtle 2s infinite ease-in-out;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.leaflet-container {
+  font-family: inherit !important;
+  background-color: #0f172a !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #1e293b !important;
+  color: #f8fafc !important;
+  border: 1px solid #334155 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-popup-tip {
+  background: #1e293b !important;
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px !important;
+  line-height: 1.4 !important;
+}
+
+.hazard-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: bold;
+  font-size: 13px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease;
+  border: 2px solid white;
+}
+
+.hazard-pin:hover {
+  transform: scale(1.25);
+  z-index: 1000 !important;
+}
+
+.pin-critical {
+  background-color: #ef4444;
+  color: white;
+}
+
+.pin-medium {
+  background-color: #f59e0b;
+  color: #020617;
+}
+
+.pin-resolved {
+  background-color: #10b981;
+  color: white;
+}
