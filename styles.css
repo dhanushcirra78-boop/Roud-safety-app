@@ -1,74 +1,319 @@
-/* Custom animations and Leaflet Map styling */
-@keyframes pulse-subtle {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(1.08); }
+
+/* =========================================
+   SAFEROUTE — PREMIUM INTERFACE UPGRADE
+   Apple-inspired design, without Apple branding
+   Existing application logic remains untouched
+   ========================================= */
+
+:root {
+  color-scheme: dark;
+  --sr-bg: #080b12;
+  --sr-surface: rgba(24, 30, 43, 0.88);
+  --sr-surface-raised: #171e2b;
+  --sr-border: rgba(160, 177, 204, 0.15);
+  --sr-text: #f5f7fb;
+  --sr-muted: #a0aec0;
+  --sr-accent: #f6b93b;
+  --sr-radius: 22px;
+  --sr-ease: cubic-bezier(.2, .8, .2, 1);
 }
 
-.pulse-dot {
-  animation: pulse-subtle 2s infinite ease-in-out;
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
-/* Hide scrollbars cleanly */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+body {
+  background:
+    radial-gradient(ellipse at 10% 0%, rgba(44, 93, 143, .16), transparent 38%),
+    radial-gradient(ellipse at 95% 20%, rgba(246, 185, 59, .07), transparent 30%),
+    var(--sr-bg) !important;
+  color: var(--sr-text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Segoe UI", sans-serif;
+  letter-spacing: -0.015em;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-width: 320px;
 }
 
-/* Leaflet Map overrides for dark mode aesthetic */
-.leaflet-container {
-  font-family: inherit !important;
-  background-color: #0f172a !important;
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition:
+    transform .2s var(--sr-ease),
+    box-shadow .2s var(--sr-ease),
+    filter .2s var(--sr-ease),
+    border-color .2s var(--sr-ease);
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #80c8ff;
+  outline-offset: 3px;
+}
+
+button:active {
+  transform: scale(.975);
+}
+
+/* Premium main header */
+.max-w-6xl > header {
+  background: rgba(18, 24, 36, .84) !important;
+  border: 1px solid var(--sr-border) !important;
+  border-radius: 26px !important;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, .22);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  padding: 20px !important;
+}
+
+.max-w-6xl > header h1 {
+  letter-spacing: -.045em;
+  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+}
+
+.max-w-6xl > header p {
+  line-height: 1.5;
+}
+
+/* Refined cards across both app views */
+#citizen-view .rounded-2xl,
+#authority-view .rounded-2xl {
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease,
+    background-color .25s ease;
+}
+
+#citizen-view > div:first-child > div,
+#authority-view > div:first-child > div {
+  border-color: var(--sr-border);
+  border-radius: var(--sr-radius);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .12);
+}
+
+#citizen-view > div:first-child > div:first-child {
+  background: linear-gradient(
+    145deg,
+    rgba(26, 39, 53, .94),
+    rgba(17, 24, 37, .94)
+  ) !important;
+}
+
+#citizen-view > div:first-child > div:nth-child(2) {
+  background: rgba(20, 27, 40, .9) !important;
+}
+
+/* Mobile app frame */
+#citizen-view > div:nth-child(2) > div {
+  border-color: #343e50 !important;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, .38),
+    0 0 0 1px rgba(255, 255, 255, .035);
+}
+
+/* Community report cards */
+#hazard-feed-list > div {
+  border: 1px solid var(--sr-border) !important;
+  border-radius: 18px !important;
+  background: linear-gradient(
+    145deg,
+    rgba(25, 32, 46, .98),
+    rgba(17, 23, 35, .98)
+  ) !important;
+  padding: 16px !important;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, .12);
+}
+
+#hazard-feed-list > div:hover {
+  border-color: rgba(246, 185, 59, .32) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .2);
+}
+
+/* Better form fields */
+input:not([type="file"]),
+textarea,
+select {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #8290a4;
+}
+
+#report-modal > div {
+  border-color: var(--sr-border);
+  box-shadow: 0 -18px 60px rgba(0, 0, 0, .28);
+}
+
+#category-pills .cat-pill {
+  min-height: 46px;
+  border-radius: 14px;
+}
+
+#category-pills .cat-pill:hover {
+  border-color: rgba(246, 185, 59, .65);
+}
+
+/* Buttons: preserve existing functional colors */
+button[class*="bg-amber-500"] {
+  box-shadow: 0 4px 14px rgba(246, 185, 59, .12);
+}
+
+button[class*="bg-amber-500"]:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 7px 20px rgba(246, 185, 59, .2);
+}
+
+button[class*="bg-sky-500"],
+button[class*="bg-emerald-500"] {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .12);
+}
+
+/* Map controls */
+#leaflet-map {
+  min-height: 260px;
+  border-radius: 16px;
+}
+
+.leaflet-control-zoom a {
+  background: #182131 !important;
+  color: #f5f7fb !important;
+  border-color: #344055 !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #29364a !important;
 }
 
 .leaflet-popup-content-wrapper {
-  background: #1e293b !important;
-  color: #f8fafc !important;
-  border: 1px solid #334155 !important;
-  border-radius: 12px !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(16px);
 }
 
-.leaflet-popup-tip {
-  background: #1e293b !important;
+/* Municipal dashboard */
+#authority-view .grid > div {
+  min-width: 0;
 }
 
-.leaflet-popup-content {
-  margin: 12px 14px !important;
-  line-height: 1.4 !important;
+#kanban-new > div,
+#kanban-progress > div,
+#kanban-resolved > div {
+  border: 1px solid var(--sr-border);
+  border-radius: 15px;
+  padding: 14px;
+  background: rgba(11, 16, 26, .65);
 }
 
-/* Custom Marker styles */
-.hazard-pin {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  font-weight: bold;
-  font-size: 13px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  transition: transform 0.2s ease;
-  border: 2px solid white;
+#authority-view button {
+  min-height: 36px;
 }
 
-.hazard-pin:hover {
-  transform: scale(1.25);
-  z-index: 1000 !important;
+/* More comfortable touch targets */
+#mobile-tab-feed,
+#mobile-tab-map {
+  min-height: 42px;
 }
 
-.pin-critical {
-  background-color: #ef4444;
-  color: white;
+#report-modal button,
+#report-modal input {
+  scroll-margin: 16px;
 }
 
-.pin-medium {
-  background-color: #f59e0b;
-  color: #020617;
+/* Responsive layout */
+@media (max-width: 767px) {
+  body {
+    padding: 10px !important;
+  }
+
+  .max-w-6xl {
+    gap: 16px !important;
+  }
+
+  .max-w-6xl > header {
+    padding: 15px !important;
+    border-radius: 21px !important;
+    gap: 14px !important;
+  }
+
+  .max-w-6xl > header > div:last-child {
+    width: 100%;
+    align-self: stretch;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
+  .max-w-6xl > header > div:last-child button {
+    flex: 0 0 auto;
+    min-height: 40px;
+  }
+
+  #citizen-view {
+    gap: 18px !important;
+  }
+
+  #citizen-view > div:nth-child(2) > div {
+    height: min(740px, 78dvh) !important;
+    min-height: 540px;
+    border-width: 3px !important;
+    border-radius: 30px !important;
+  }
+
+  #citizen-view > div:first-child > div,
+  #authority-view > div:first-child > div {
+    padding: 17px !important;
+  }
+
+  #authority-view > div:first-child {
+    gap: 10px !important;
+  }
+
+  #hazard-feed-list > div {
+    padding: 13px !important;
+  }
+
+  #report-modal > div {
+    padding: 20px !important;
+    padding-bottom: max(20px, env(safe-area-inset-bottom)) !important;
+  }
 }
 
-.pin-resolved {
-  background-color: #10b981;
-  color: white;
+@media (max-width: 380px) {
+  .max-w-6xl > header > div:last-child button {
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+    font-size: 11px !important;
+  }
+
+  #citizen-view > div:nth-child(2) > div {
+    border-radius: 24px !important;
+  }
+
+  #hazard-feed-list > div {
+    padding: 11px !important;
+  }
+}
+
+/* Accessibility: respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
 }
